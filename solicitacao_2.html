@@ -1,0 +1,57 @@
+<section class="estoque" id="estoque">
+    <div class="interface">
+        <h2 class="titulo">SOLICITAÇÃO DE ITENS</h2>
+        <table border="1" cellspacing="0" cellpadding="5" style="width: 100%; text-align: center;">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantidade Atual</th>
+                    <th>Quantidade a Solicitar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AAS</td>
+                    <td><input type="number" min="0" value="0" oninput="calcularSolicitacao(this)"></td>
+                    <td class="solicitacao">0</td>
+                </tr>
+                <tr>
+                    <td>ACETILCISTEÍNA 300MG</td>
+                    <td><input type="number" min="0" value="0" oninput="calcularSolicitacao(this)"></td>
+                    <td class="solicitacao">0</td>
+                </tr>
+                <tr>
+                    <td>ADENOSINA 3MG</td>
+                    <td><input type="number" min="0" value="0" oninput="calcularSolicitacao(this)"></td>
+                    <td class="solicitacao">0</td>
+                </tr>
+                <tr>
+                    <td>ADENOSINA 6MG</td>
+                    <td><input type="number" min="0" value="0" oninput="calcularSolicitacao(this)"></td>
+                    <td class="solicitacao">0</td>
+                </tr>
+                <tr>
+                    <td>ÁGUA PARA INJETÁVEIS</td>
+                    <td><input type="number" min="0" value="0" oninput="calcularSolicitacao(this)"></td>
+                    <td class="solicitacao">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 10px; font-style: italic;">*A quantidade mínima de cada item em estoque deve ser 5 unidades.</p>
+    </div>
+</section>
+
+<script>
+    const MINIMO_ESTOQUE = 5;
+
+    function calcularSolicitacao(input) {
+        const row = input.parentElement.parentElement;
+        const solicitacaoCell = row.querySelector('.solicitacao');
+        const quantidadeAtual = parseInt(input.value) || 0;
+
+        // Calcula o quanto precisa pedir para atingir o mínimo
+        const quantidadeParaPedir = Math.max(MINIMO_ESTOQUE - quantidadeAtual, 0);
+
+        solicitacaoCell.textContent = quantidadeParaPedir;
+    }
+</script>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Itens</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        .container {
+            background: #fff;
+            padding: 40px 60px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: 500;
+            color: #555;
+        }
+        select {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Solicitação de itens ao estoque central</h1>
+        <h2>SCMC - UMMES - SAMU 192</h2>
+        <select id="cidade">
+            <option value="">Selecione sua base...</option>
+            <option value="santa_cruz">Santa Cruz do Rio Pardo</option>
+            <option value="ourinhos">Ourinhos</option>
+            <option value="canitar">Canitar</option>
+            <option value="ipaussu">Ipaussu</option>
+            <option value="bernardino">Bernardino de Campos</option>
+            <option value="oleo">Óleo</option>
+            <option value="timburi">Timburi</option>
+        </select>
+        <button onclick="entrarBase()">Entrar</button>
+    </div>
+
+    <script>
+        function entrarBase() {
+            const cidade = document.getElementById('cidade').value;
+            if (!cidade) {
+                alert('Por favor, selecione uma cidade.');
+                return;
+            }
+
+            // Redirecionamento conforme cidade
+            if (cidade === 'ourinhos' || cidade === 'santa_cruz') {
+                window.location.href = 'solicitacao_1.html';
+            } else {
+                window.location.href = 'solicitacao_2.html';
+            }
+        }
+    </script>
+</body>
+</html>
