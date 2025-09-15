@@ -13,10 +13,11 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: #f5f5f5;
+            background: url('images/background.png') no-repeat center center fixed;
+            background-size: contain; /* redimensiona a imagem para caber inteira na tela */
         }
         .container {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.9); /* fundo semi-transparente */
             padding: 40px 60px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -82,12 +83,11 @@
                 return;
             }
 
-            // Redirecionamento conforme cidade
-            if (cidade === 'ourinhos' || cidade === 'santa_cruz') {
-                window.location.href = 'solicitacao_1.html';
-            } else {
-                window.location.href = 'solicitacao_2.html';
-            }
+            // Salva a cidade no localStorage
+            localStorage.setItem('cidadeSelecionada', cidade);
+
+            // Redireciona para a página de orientações
+            window.location.href = 'orientacoes.html';
         }
     </script>
 </body>
