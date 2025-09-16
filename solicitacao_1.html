@@ -13,27 +13,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
-            /* Fundo principal */
             background: url('images/background.png') no-repeat center center fixed;
             background-size: cover;
             position: relative;
         }
-
-        /* Rodapé com background2 */
         .background2-footer {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 100px; /* diminui altura do rodapé */
+            height: 100px;
             background: url('images/background2.png') no-repeat center bottom;
-            background-size: contain; /* ajusta para caber toda a imagem */
+            background-size: contain;
             z-index: 0;
         }
-
         .estoque {
-            background: rgba(255, 255, 255, 0.9); /* fundo semi-transparente para a tabela */
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px 40px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -42,45 +37,44 @@
             z-index: 1;
             position: relative;
         }
-
         .estoque .titulo {
             text-align: center;
             font-size: 24px;
             margin-bottom: 20px;
             font-weight: 700;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: center;
         }
-
         th, td {
             padding: 8px 10px;
             border: 1px solid #333;
         }
-
         input[type="number"] {
             width: 80px;
             padding: 5px;
             text-align: center;
         }
-
         .solicitacao {
             font-weight: bold;
             color: #007bff;
         }
-
         p {
             margin-top: 10px;
             font-style: italic;
             text-align: center;
         }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <!-- Background2 no rodapé -->
     <div class="background2-footer"></div>
 
     <section class="estoque" id="estoque">
@@ -123,6 +117,7 @@
                 </tbody>
             </table>
             <p>*A quantidade mínima de cada item em estoque deve ser 5 unidades.</p>
+            <button onclick="enviarParaSheets()">OK</button>
         </div>
     </section>
 
@@ -133,11 +128,37 @@
             const row = input.parentElement.parentElement;
             const solicitacaoCell = row.querySelector('.solicitacao');
             const quantidadeAtual = parseInt(input.value) || 0;
-
-            // Calcula o quanto precisa pedir para atingir o mínimo
             const quantidadeParaPedir = Math.max(MINIMO_ESTOQUE - quantidadeAtual, 0);
-
             solicitacaoCell.textContent = quantidadeParaPedir;
+        }
+
+        async function enviarParaSheets() {
+            const linhas = document.querySelectorAll('tbody tr');
+            const dados = [];
+
+            linhas.forEach(row => {
+                const nome = row.cells[0].textContent;
+                const quantidadeAtual = parseInt(row.cells[1].querySelector('input').value) || 0;
+                const quantidadeSolicitar = parseInt(row.cells[2].textContent) || 0;
+                dados.push({ nome, quantidadeAtual, quantidadeSolicitar });
+            });
+
+            try {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbyawS5qg2ByjFm4f9RQGOku-Fhmr2dz00j2R1unzgXZFKJsi2k2GrVHnQC8PSnmmQvmsw/exec", {
+                    method: "POST",
+                    body: JSON.stringify(dados),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const result = await response.json();
+                if (result.status === 'ok') {
+                    alert("Dados enviados com sucesso!");
+                } else {
+                    alert("Erro ao enviar dados: " + result.mensagem);
+                }
+            } catch (err) {
+                alert("Erro de conexão: " + err);
+            }
         }
     </script>
 </body>
