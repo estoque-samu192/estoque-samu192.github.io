@@ -14,10 +14,10 @@
             height: 100vh;
             margin: 0;
             background: url('images/background.png') no-repeat center center fixed;
-            background-size: contain; /* redimensiona a imagem para caber inteira na tela */
+            background-size: contain;
         }
         .container {
-            background: rgba(255, 255, 255, 0.9); /* fundo semi-transparente */
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px 60px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -35,17 +35,18 @@
             font-weight: 500;
             color: #555;
         }
-        select {
+        input, select {
             padding: 10px 15px;
             font-size: 16px;
             border-radius: 5px;
             border: 1px solid #ccc;
             width: 100%;
+            margin-bottom: 15px;
         }
         button {
             padding: 12px 25px;
             font-size: 16px;
-            margin-top: 25px;
+            margin-top: 10px;
             border: none;
             border-radius: 5px;
             background-color: #007bff;
@@ -62,6 +63,12 @@
     <div class="container">
         <h1>Solicitação de itens ao estoque central</h1>
         <h2>SCMC - UMMES - SAMU 192</h2>
+
+        <input type="text" id="nome" placeholder="Nome" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g,'')" />
+        <input type="text" id="cpf" placeholder="CPF" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g,'')" />
+        <input type="text" id="coren" placeholder="COREN" oninput="this.value = this.value.replace(/[^0-9]/g,'')" />
+        <input type="text" id="data" placeholder="Data (DD/MM/AAAA)" oninput="this.value = this.value.replace(/[^0-9\/]/g,'')" />
+
         <select id="cidade">
             <option value="">Selecione sua base...</option>
             <option value="santa_cruz">Santa Cruz do Rio Pardo</option>
@@ -72,18 +79,29 @@
             <option value="oleo">Óleo</option>
             <option value="timburi">Timburi</option>
         </select>
+
         <button onclick="entrarBase()">Entrar</button>
     </div>
 
     <script>
         function entrarBase() {
+            const nome = document.getElementById('nome').value.trim();
+            const cpf = document.getElementById('cpf').value.trim();
+            const coren = document.getElementById('coren').value.trim();
+            const data = document.getElementById('data').value.trim();
             const cidade = document.getElementById('cidade').value;
-            if (!cidade) {
-                alert('Por favor, selecione uma cidade.');
-                return;
-            }
 
-            // Salva a cidade no localStorage
+            if (!nome) { alert('Por favor, digite o nome.'); return; }
+            if (!cpf){ alert('Por favor, digite o CPF.'); return; }
+            if (!coren) { alert('Por favor, digite o COREN.'); return; }
+            if (!data) { alert('Por favor, digite a data.'); return; }
+            if (!cidade) { alert('Por favor, selecione uma cidade.'); return; }
+
+            // Salva os dados no localStorage
+            localStorage.setItem('nome', nome);
+            localStorage.setItem('cpf', cpf);
+            localStorage.setItem('coren', coren);
+            localStorage.setItem('data', data);
             localStorage.setItem('cidadeSelecionada', cidade);
 
             // Redireciona para a página de orientações

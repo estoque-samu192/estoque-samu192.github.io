@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitação de Itens - MENSAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('images/background.png') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+    .background2-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: url('images/background2.png') no-repeat center bottom;
+      background-size: contain;
+      z-index: 0;
+    }
+    .estoque {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      max-width: 900px;
+      width: 95%;
+      z-index: 1;
+      position: relative;
+    }
+    .titulo {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    h3 {
+      margin-top: 30px;
+      font-size: 30px;
+      color: #333;
+      text-align: left;
+      position: relative;
+      padding-bottom: 5px;
+    }
+    h3::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #007bff;
+      margin-top: 5px;
+      border-radius: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid #333;
+    }
+    th {
+      background: #f0f0f0;
+      font-weight: 600;
+    }
+    input[type="number"] {
+      width: 80px;
+      padding: 5px;
+      text-align: center;
+    }
+    .solicitacao {
+      font-weight: bold;
+      color: #007bff;
+    }
+    .botoes-formulario {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    .botoes-formulario button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .botoes-formulario button[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .botoes-formulario button[type="button"] {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background2-footer"></div>
+
+  <section class="estoque" id="estoque">
+    <h2 class="titulo">SOLICITAÇÃO DE ITENS - MENSAL</h2>
+
+    <!-- MEDICAMENTOS -->
+    <h3>MEDICAMENTOS</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantidade Atual</th>
+          <th>Quantidade a Solicitar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dipirona</td>
+          <td><input type="number" min="0" value="0" data-minimo="20"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+        <tr>
+          <td>Paracetamol</td>
+          <td><input type="number" min="0" value="0" data-minimo="15"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+        <tr>
+          <td>Amoxicilina</td>
+          <td><input type="number" min="0" value="0" data-minimo="10"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- MATERIAIS FARMÁCIA -->
+    <h3>MATERIAIS FARMÁCIA</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantidade Atual</th>
+          <th>Quantidade a Solicitar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Equipo bomba</td>
+          <td><input type="number" min="0" value="0" data-minimo="5"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+        <tr>
+          <td>Seringa 10ml</td>
+          <td><input type="number" min="0" value="0" data-minimo="50"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+        <tr>
+          <td>Agulha 25x7</td>
+          <td><input type="number" min="0" value="0" data-minimo="100"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- PRODUTOS DE LIMPEZA -->
+    <h3>PRODUTOS DE LIMPEZA</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantidade Atual</th>
+          <th>Quantidade a Solicitar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Álcool 70%</td>
+          <td><input type="number" min="0" value="0" data-minimo="30"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+        <tr>
+          <td>Água sanitária</td>
+          <td><input type="number" min="0" value="0" data-minimo="40"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+        <tr>
+          <td>Detergente neutro</td>
+          <td><input type="number" min="0" value="0" data-minimo="25"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- PRODUTOS ALIMENTÍCIO -->
+    <h3>PRODUTOS ALIMENTÍCIO</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantidade Atual</th>
+          <th>Quantidade a Solicitar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Arroz 5kg</td>
+          <td><input type="number" min="0" value="0" data-minimo="20"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+        <tr>
+          <td>Feijão 1kg</td>
+          <td><input type="number" min="0" value="0" data-minimo="15"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+        <tr>
+          <td>Açúcar 5kg</td>
+          <td><input type="number" min="0" value="0" data-minimo="10"></td>
+          <td class="solicitacao">0</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form action="https://script.google.com/macros/s/AKfycbyYVvojFdhxp8cJILY5XLUCiV5M4-TTszArbr5FJm8tqqU450aFOHjYIrIF14fqwC-otA/exec" method="post" id="form_solicitacao">
+      <input type="hidden" name="data" id="data_solicitacao">
+
+      <div class="botoes-formulario">
+        <button type="button" onclick="window.location.href='mensal_emergencial.html'">Voltar</button>
+        <button type="submit">Enviar</button>
+      </div>
+    </form>
+  </section>
+
+  <script>
+    function carregarLocalStorage() {
+      const dados = JSON.parse(localStorage.getItem('dadosSolicitacao') || '[]');
+      const linhas = document.querySelectorAll('tbody tr');
+      linhas.forEach((row, i) => {
+        if (dados[i]) {
+          row.querySelector('input').value = dados[i].quantidadeAtual;
+          row.querySelector('.solicitacao').textContent = dados[i].quantidadeSolicitar;
+        }
+      });
+    }
+
+    function salvarLocalStorage() {
+      const linhas = document.querySelectorAll('tbody tr');
+      const dados = [];
+      linhas.forEach(row => {
+        const nome = row.cells[0].textContent;
+        const quantidadeAtual = parseInt(row.querySelector('input').value) || 0;
+        const quantidadeSolicitar = parseInt(row.querySelector('.solicitacao').textContent) || 0;
+        dados.push({ nome, quantidadeAtual, quantidadeSolicitar });
+      });
+      localStorage.setItem('dadosSolicitacao', JSON.stringify(dados));
+    }
+
+    function calcularSolicitacao(input) {
+      const row = input.parentElement.parentElement;
+      const solicitacaoCell = row.querySelector('.solicitacao');
+      const quantidadeAtual = parseInt(input.value) || 0;
+      const minimo = parseInt(input.dataset.minimo) || 0;
+      const quantidadeParaPedir = Math.max(minimo - quantidadeAtual, 0);
+      solicitacaoCell.textContent = quantidadeParaPedir;
+      salvarLocalStorage();
+    }
+
+    window.addEventListener('load', () => {
+      carregarLocalStorage();
+      document.querySelectorAll('tbody input').forEach(input => {
+        input.addEventListener('input', () => calcularSolicitacao(input));
+      });
+    });
+
+document.querySelector('#form_solicitacao button[type="submit"]').addEventListener('click', () => {
+  const linhas = document.querySelectorAll('tbody tr');
+  const itens = [];
+
+  linhas.forEach(row => {
+    const nome = row.cells[0].textContent;
+    const quantidadeAtual = parseInt(row.querySelector('input').value) || 0;
+    const quantidadeSolicitar = parseInt(row.querySelector('.solicitacao').textContent) || 0;
+    itens.push({ nome, quantidadeAtual, quantidadeSolicitar });
+  });
+
+  // Recupera os dados do solicitante do localStorage
+  const nomeSolicitante = localStorage.getItem('nome') || '';
+  const cpf = localStorage.getItem('cpf') || '';
+  const coren = localStorage.getItem('coren') || '';
+  const cidadeSelecionada = localStorage.getItem('cidadeSelecionada') || '';
+
+  // Adiciona os dados do usuário a cada item
+  const dadosParaEnviar = itens.map(item => ({
+    cidadeSelecionada,
+    nomeSolicitante,
+    cpf,
+    coren,
+    nome: item.nome,
+    quantidadeAtual: item.quantidadeAtual,
+    quantidadeSolicitar: item.quantidadeSolicitar
+  }));
+
+  document.getElementById('data_solicitacao').value = JSON.stringify(dadosParaEnviar);
+});
+
+  </script>
+</body>
+</html>
