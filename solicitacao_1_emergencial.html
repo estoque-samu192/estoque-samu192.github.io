@@ -117,11 +117,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>AAS</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>ACETILCISTEÍNA 300MG</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>ADENOSINA 3MG</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>ADENOSINA 6MG</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>ÁGUA PARA INJETÁVEIS</td><td><input type="number" min="0" value="0"></td></tr>
+      <tr><td>AAS</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>ACETILCISTEÍNA 300MG</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>ADENOSINA 3MG</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>ADENOSINA 6MG</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>ÁGUA PARA INJETÁVEIS</td><td><input type="number" min="0" value=""></td></tr>
     </tbody>
   </table>
 
@@ -135,10 +135,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>Equipo bomba</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>Equipo micro</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>Equipo macro</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>Equipo top</td><td><input type="number" min="0" value="0"></td></tr>
+      <tr><td>Equipo bomba</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>Equipo micro</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>Equipo macro</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>Equipo top</td><td><input type="number" min="0" value=""></td></tr>
     </tbody>
   </table>
 
@@ -152,9 +152,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>Álcool 70%</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>Água sanitária</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>Detergente neutro</td><td><input type="number" min="0" value="0"></td></tr>
+      <tr><td>Álcool 70%</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>Água sanitária</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>Detergente neutro</td><td><input type="number" min="0" value=""></td></tr>
     </tbody>
   </table>
 
@@ -168,36 +168,79 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>Água mineral</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>Pão de forma</td><td><input type="number" min="0" value="0"></td></tr>
-      <tr><td>Leite</td><td><input type="number" min="0" value="0"></td></tr>
+      <tr><td>Água mineral</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>Pão de forma</td><td><input type="number" min="0" value=""></td></tr>
+      <tr><td>Leite</td><td><input type="number" min="0" value=""></td></tr>
     </tbody>
   </table>
 
-  <form action="https://script.google.com/macros/s/AKfycbxaUF2IYUfoSYi3At_ghTDoOxrfLwPTwZdpq2xJSy3_zv-ldJC58ukr5j7-4PdtB4Zb/exec" method="post" id="form_solicitacao">
+  <form action="https://script.google.com/macros/s/AKfycbz7WHdAgQ2EubOBKRlFJsnILNIStkUUSGE0P375vvowv1Y--wU1FgldHXayr_S0WmGO/exec" method="post" id="form_solicitacao">
     <input type="hidden" name="data" id="data_solicitacao">
     <div class="botoes-formulario">
-      <button type="button" onclick="window.location.href='index.html'">Voltar</button>
+      <button type="button" onclick="window.location.href='mensal_emergencial.html'">Voltar</button>
       <button type="submit">Enviar</button>
     </div>
   </form>
 </section>
 
+
 <script>
 document.querySelector('#form_solicitacao').addEventListener('submit', function(e){
   e.preventDefault();
+  
   const tabelas = document.querySelectorAll('table tbody');
-  const dados = [];
+  const itens = [];
+
+  // percorre todas as tabelas e linhas
   tabelas.forEach(tbody => {
     tbody.querySelectorAll('tr').forEach(row => {
-      const nome = row.cells[0].textContent;
-      const quantidade = parseInt(row.cells[1].querySelector('input').value) || 0;
-      dados.push({ nome, quantidadeSolicitar: quantidade });
+      const item = row.cells[0].textContent; // <-- aqui deixamos explícito que é "item"
+      const quantidade = parseInt(row.querySelector('input').value) || 0;
+
+      if (quantidade > 0) {
+        itens.push({ item, quantidade });
+      }
     });
   });
-  document.getElementById('data_solicitacao').value = JSON.stringify(dados);
+
+  if (itens.length === 0) {
+    alert('Nenhum item preenchido para envio.');
+    return;
+  }
+
+  // pega os dados do usuário do localStorage
+  const base = localStorage.getItem('cidadeSelecionada') || '';
+  const nome = localStorage.getItem('nome') || '';
+  const cpf = localStorage.getItem('cpf') || '';
+  const coren = localStorage.getItem('coren') || '';
+  const data = localStorage.getItem('data') || '';
+
+  // monta o JSON final com BASE, NOME, CPF, COREN, DATA, ITEM, QUANTIDADE
+  const dadosParaEnviar = itens.map(d => ({
+    base,
+    nome,
+    cpf,
+    coren,
+    data,
+    item: d.item,
+    quantidade: d.quantidade
+  }));
+
+  // atribui ao input hidden
+  document.getElementById('data_solicitacao').value = JSON.stringify(dadosParaEnviar);
+
+  // envia o formulário
   this.submit();
+
+  // reseta todos os inputs após enviar
+  tabelas.forEach(tbody => {
+    tbody.querySelectorAll('input').forEach(input => input.value = '');
+  });
 });
+</script>
+
+
+
 </script>
 </body>
 </html>
